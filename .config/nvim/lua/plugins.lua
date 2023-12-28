@@ -1,28 +1,27 @@
-
 -- lazyvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"williamboman/mason.nvim", -- mason
-	"williamboman/mason-lspconfig.nvim", -- masonとnvim-lspconfigを統合してインストールとか簡単にするやつ
-	"neovim/nvim-lspconfig", -- nvim-lspconfig
+  "williamboman/mason.nvim",          -- mason
+  "williamboman/mason-lspconfig.nvim", -- masonとnvim-lspconfigを統合してインストールとか簡単にするやつ
+  "neovim/nvim-lspconfig",            -- nvim-lspconfig
   -- nvim補完機能系
-	"hrsh7th/nvim-cmp",
+  "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/vim-vsnip",
-  "hrsh7th/cmp-buffer", -- 現在のバッファにある単語を補完
-  "hrsh7th/cmp-path", -- ファイルシステムのパス補完するプラグイン
+  "hrsh7th/vim-vsnip",
+  "hrsh7th/cmp-buffer",  -- 現在のバッファにある単語を補完
+  "hrsh7th/cmp-path",    -- ファイルシステムのパス補完するプラグイン
   "hrsh7th/cmp-cmdline", -- コマンドラインモードでの保管機能を提供するプラグイン
   -- ステータスバーを綺麗にする
   'vim-airline/vim-airline',
@@ -31,12 +30,12 @@ require("lazy").setup({
 })
 require("mason").setup()
 require("mason-lspconfig").setup_handlers({
-	function(server)
-		local opt = {
-			capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-		}
-		require("lspconfig")[server].setup(opt)
-	end,
+  function(server)
+    local opt = {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    }
+    require("lspconfig")[server].setup(opt)
+  end,
 })
 
 -- lsp-cofig LSPがアタッチした時の処理
@@ -71,29 +70,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local cmp = require("cmp")
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
-		end,
-	},
-	sources = {
-		{ name = "nvim_lsp" },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  sources = {
+    { name = "nvim_lsp" },
     { name = "vsnip" },
-		{ name = "buffer" },
-		{ name = "path" },
-	},
+    { name = "buffer" },
+    { name = "path" },
+  },
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-	mapping = cmp.mapping.preset.insert({
-	  ["<C-p>"] = cmp.mapping.select_prev_item(),
-	  ["<C-n>"] = cmp.mapping.select_next_item(),
-	  ['<C-l>'] = cmp.mapping.complete(),
-	  ['<C-e>'] = cmp.mapping.abort(),
-	  ["<CR>"] = cmp.mapping.confirm { select = true },
-	}),
-	experimental = {
-		ghost_text = true,
-	},
+  mapping = cmp.mapping.preset.insert({
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ['<C-l>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
+  }),
+  experimental = {
+    ghost_text = true,
+  },
 })
