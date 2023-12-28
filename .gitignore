@@ -1,0 +1,10 @@
+*
+!/.config
+/.config/*
+!/.config/nvim/
+!/.config/nvim/*
+!/.config/nvim/lua/*
+!.bash_profile
+!.bashrc
+!.gitignore
+!.tmux.conf
