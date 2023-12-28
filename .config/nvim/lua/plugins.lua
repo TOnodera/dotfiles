@@ -24,6 +24,9 @@ require("lazy").setup({
   "hrsh7th/cmp-buffer", -- 現在のバッファにある単語を補完
   "hrsh7th/cmp-path", -- ファイルシステムのパス補完するプラグイン
   "hrsh7th/cmp-cmdline", -- コマンドラインモードでの保管機能を提供するプラグイン
+  -- ステータスバーを綺麗にする
+  'vim-airline/vim-airline',
+  'vim-airline/vim-airline-themes',
 
 })
 require("mason").setup()
