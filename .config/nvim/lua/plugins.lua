@@ -26,6 +26,8 @@ require("lazy").setup({
   -- ステータスバーを綺麗にする
   'vim-airline/vim-airline',
   'vim-airline/vim-airline-themes',
+  -- ファイルツリー
+  'scrooloose/nerdtree',
 
 })
 require("mason").setup()
