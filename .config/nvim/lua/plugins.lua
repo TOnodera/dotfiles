@@ -39,8 +39,10 @@ require("mason-lspconfig").setup_handlers({
         "lua-language-server",
         "dockerls",
         "python-lsp-server",
-        "ansible-language-server"
-      }
+        "ansible-language-server",
+        "ansible-lint"
+      },
+      automatic_installation = true
     }
     require("lspconfig")[server].setup(opt)
   end,
