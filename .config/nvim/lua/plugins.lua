@@ -15,7 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "williamboman/mason.nvim",           -- mason
   "williamboman/mason-lspconfig.nvim", -- masonとnvim-lspconfigを統合してインストールとか簡単にするやつ
-  "neovim/nvim-lspconfig",             -- nvim-lspconfig
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
+  --  "neovim/nvim-lspconfig",             -- nvim-lspconfig
   -- nvim補完機能系
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
@@ -32,23 +33,23 @@ require("lazy").setup({
 })
 require("mason").setup()
 require("mason-lspconfig").setup {
-      ensure_installed = {
-        "lua-language-server",
-        "dockerls",
-        "python-lsp-server",
-        "ansible-language-server",
-        "ansible-lint"
-      },
 }
-require("mason-lspconfig").setup_handlers({
+require("mason-lspconfig").setup_handlers {
   function(server)
     local opt = {
       capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       automatic_installation = true
     }
-    require("lspconfig")[server].setup(opt)
   end,
-})
+}
+require('mason-tool-installer').setup {
+
+  ensure_installed = {
+    "lua-language-server",
+    "dockerls",
+    "python-lsp-server",
+  }
+}
 
 -- lsp-cofig LSPがアタッチした時の処理
 vim.api.nvim_create_autocmd('LspAttach', {
