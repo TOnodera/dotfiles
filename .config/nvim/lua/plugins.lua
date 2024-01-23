@@ -31,10 +31,7 @@ require("lazy").setup({
 
 })
 require("mason").setup()
-require("mason-lspconfig").setup_handlers({
-  function(server)
-    local opt = {
-      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+require("mason-lspconfig").setup {
       ensure_installed = {
         "lua-language-server",
         "dockerls",
@@ -42,6 +39,11 @@ require("mason-lspconfig").setup_handlers({
         "ansible-language-server",
         "ansible-lint"
       },
+}
+require("mason-lspconfig").setup_handlers({
+  function(server)
+    local opt = {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       automatic_installation = true
     }
     require("lspconfig")[server].setup(opt)
