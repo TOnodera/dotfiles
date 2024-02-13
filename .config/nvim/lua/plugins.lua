@@ -15,8 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "williamboman/mason.nvim",           -- mason
   "williamboman/mason-lspconfig.nvim", -- masonとnvim-lspconfigを統合してインストールとか簡単にするやつ
-  "WhoIsSethDaniel/mason-tool-installer.nvim",
-  --  "neovim/nvim-lspconfig",             -- nvim-lspconfig
+  "neovim/nvim-lspconfig",             -- nvim-lspconfig
+  -- "WhoIsSethDaniel/mason-tool-installer.nvim",
   -- nvim補完機能系
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
@@ -29,29 +29,31 @@ require("lazy").setup({
   'vim-airline/vim-airline-themes',
   -- ファイルツリー
   'scrooloose/nerdtree',
-
-})
-require("mason").setup()
-require("mason-lspconfig").setup {
-}
-require("mason-lspconfig").setup_handlers {
-  function(server)
-    local opt = {
-      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      automatic_installation = true
-    }
-  end,
-}
-require('mason-tool-installer').setup {
-
-  ensure_installed = {
-    "lua-language-server",
-    "dockerls",
-    "python-lsp-server",
+  -- golang
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   }
-}
+})
 
--- lsp-cofig LSPがアタッチした時の処理
+
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = { 'lua_ls', 'rust_analyzer', 'gopls' }
+})
+require('lspconfig').lua_ls.setup {}
+require('lspconfig').gopls.setup {}
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
@@ -78,7 +80,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
-  end
+  end,
 })
 
 local cmp = require("cmp")
