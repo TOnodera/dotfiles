@@ -3,4 +3,8 @@ vim.keymap.set('n', '<Tab>n', ':tabnext<CR>')
 vim.keymap.set('n', '<Tab>p', ':tabprevious<CR>')
 vim.keymap.set('n', '<Space>', '<C-w>')
 vim.keymap.set('n', '<Space><Space>', '<C-w><C-w>')
+vim.keymap.set('i', '{', '{}<Left>')
+vim.keymap.set('i', '{<Enter>', '{}<Left><CR><ESC><S-o>')
+vim.keymap.set('i', '(', '()<ESC>i')
+vim.keymap.set('i', '(<Enter>', '()<Left><CR><ESC><S-o>')
 
