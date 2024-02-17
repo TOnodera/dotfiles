@@ -5,12 +5,11 @@ case $- in
 esac
 
 # Path to your oh-my-bash installation.
-export OSH="$HOME/.oh-my-bash"
+export OSH='/home/takeshi/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-# OSH_THEME="agnoster"
-OSH_THEME="powerline-multiline"
+OSH_THEME="powerline"
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -144,13 +143,21 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-# Powerline設定
-if [ -f /usr/share/powerline/bash/powerline.sh ]; then
-	powerline-daemon -q
-	POWERLINE_BASH_CONTINUATION=1
-	POWERLINE_BASH_SELECT=1
-	source /usr/share/powerline/bash/powerline.sh
-fi
+alias vim="nvim"
+alias gitl="git log --graph --all --decorate"
+alias tmux="tmux -u"
 
-# alias
-alias vim='nvim'
+# python virtualenv
+. ~/.default/bin/activate
+# cargo
+. "$HOME/.cargo/env"
+
+# for tfenv
+export PATH=$PATH:$HOME/.tfenv/bin
+
+# Login Asci Art
+printf "\e[92m"
+printf "===========================================================================================\n"
+figlet -w 200 -f standard "/* - Oh My Bash - */"
+printf "===========================================================================================\n"
+printf "\e[0m"
