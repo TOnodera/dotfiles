@@ -49,13 +49,14 @@ require("lazy").setup({
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'rust_analyzer', 'gopls', 'terraformls', 'hls' }
+  ensure_installed = { 'lua_ls', 'rust_analyzer', 'gopls', 'terraformls', 'hls', 'pylsp' }
 })
 require('lspconfig').lua_ls.setup {}
 require('lspconfig').gopls.setup {}
 require('lspconfig').terraformls.setup {}
 require('lspconfig').hls.setup {}
 require('lspconfig').rust_analyzer.setup {}
+require('lspconfig').pylsp.setup {}
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),

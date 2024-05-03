@@ -9,3 +9,4 @@
 !.gitignore
 !.tmux.conf
 !screenshot.png
+!/.config/lazygit/*

@@ -143,9 +143,6 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-alias vim="nvim"
-alias gitl="git log --graph --all --decorate"
-alias tmux="tmux -u"
 
 # python virtualenv
 . ~/.default/bin/activate
@@ -166,3 +163,12 @@ printf "\e[0m"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+
+# aliases
+alias vim="nvim"
+alias gitl="git log --graph --all --decorate"
+alias tmux="tmux -u"
+alias lzg="lazygit"
+
